@@ -1,9 +1,14 @@
 ﻿@page "/"
+@using BlazorProducts.Client.Components
 
-<PageTitle>Index</PageTitle>
+<Home Title="This is my new title" @attributes="AdditionalAttributes"></Home>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code{
+    // arbitrary parameters
+    public Dictionary<string, object> AdditionalAttributes { get; set; } =
+            new Dictionary<string, object>
+            {
+                { "src", "/assets/images/ProductsByCategory.jpg" },
+                { "alt", "This is my new title" }
+            };
+}
