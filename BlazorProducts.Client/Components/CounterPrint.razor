@@ -1,0 +1,51 @@
+﻿@using Microsoft.Extensions.Logging
+@implements IDisposable
+<h3>Counter</h3>
+
+<p role="status">Current count: @CurrentCount</p>
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+    [Parameter]
+    public int CurrentCount { get; set; } = 0;
+    [Inject]
+    public ILogger<CounterPrint>? Logger { get; set; }
+
+    private void CreateLogs()
+    {
+        var logLevels = Enum.GetValues(typeof(LogLevel)).Cast<LogLevel>();
+
+        foreach(var logLevel in logLevels.Where(l => l != LogLevel.None))
+        {
+            Logger?.Log(logLevel, logLevel.ToString());
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        CreateLogs();
+        Console.WriteLine($"OnInitialized => Title: {Title}, CurrentCount: {CurrentCount}");
+    }
+
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine($"OnParameterSet => Title: {Title}, CurrentCount: {CurrentCount}");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+            Console.WriteLine("This is the first render of the component");
+    }
+
+    protected override bool ShouldRender()
+    {
+        return true;
+    }
+
+    public void Dispose()
+    {
+        Console.WriteLine("Component CounterPrint removed from the parent's render tree.");
+    }
+}

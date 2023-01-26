@@ -1,7 +1,11 @@
 ﻿@page "/"
 @using BlazorProducts.Client.Components
 
-<Home Title="This is my new title" @attributes="AdditionalAttributes"></Home>
+<Home Title="This is my new title" @attributes="AdditionalAttributes">
+    <NewContentProperty>
+        This is my child content!
+    </NewContentProperty>
+</Home>
 
 @code{
     // arbitrary parameters
