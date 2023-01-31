@@ -17,7 +17,11 @@
             {
                 <tr>
                     <td>@company.Id</td>
-                    <td>@company.Name</td>
+                    <td>
+                        <a href="/companies/@company.Id">
+                            @company.Name
+                        </a>
+                    </td>
                     <td class="d-flex justify-content-center align-items-center">
                         <button type="button" class="btn btn-info">Update</button>
                         <button type="button" class="btn btn-danger">Delete</button>

@@ -1,0 +1,21 @@
+﻿@page "/companies/{id:guid}"
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h2>@Company.Name</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">Company address:</div>
+            <div class="col-md-8">@Company.FullAddress</div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col">
+        <a href="/companies">Back to companies list</a>
+    </div>
+</div>
