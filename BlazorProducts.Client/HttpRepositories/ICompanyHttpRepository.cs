@@ -1,11 +1,12 @@
-﻿using Entities.DataTransferObjects;
+﻿using BlazorProducts.Client.Features;
+using Entities.DataTransferObjects;
 using Entities.Models;
 
 namespace BlazorProducts.Client.HttpRepositories
 {
     public interface ICompanyHttpRepository
     {
-        Task<IEnumerable<CompanyDto>> GetCompaniesAsync();
+        Task<PagingResponse<CompanyDto>> GetCompaniesAsync(CompanyParameters companyParameters);
         Task<CompanyDto> GetCompanyByIdAsync(Guid id);
     }
 }
