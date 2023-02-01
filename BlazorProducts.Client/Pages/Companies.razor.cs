@@ -39,5 +39,13 @@ namespace BlazorProducts.Client.Pages
 
             await GetCompanies();
         }
+
+        private async Task SetSearchTerm(string searchTerm)
+        {
+            _parameters.PageNumber = 1;
+            _parameters.SearchTerm = searchTerm;
+
+            await GetCompanies();
+        }
     }
 }

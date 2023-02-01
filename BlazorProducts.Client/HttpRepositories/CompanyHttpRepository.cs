@@ -27,6 +27,10 @@ namespace BlazorProducts.Client.HttpRepositories
                 ["pageNumber"] = companyParameters.PageNumber.ToString(),
                 ["pageSize"] = companyParameters.PageSize.ToString(),
             };
+
+            if (!string.IsNullOrEmpty(companyParameters.SearchTerm))
+                queryStringParam.Add("searchTerm", companyParameters.SearchTerm);
+
             var response = await _httpClient
                                     .GetAsync(QueryHelpers.AddQueryString("Companies", queryStringParam));
             var content = await response.Content.ReadAsStringAsync();
