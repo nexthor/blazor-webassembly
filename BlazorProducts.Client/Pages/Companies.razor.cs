@@ -1,11 +1,12 @@
 ﻿using BlazorProducts.Client.Features;
+using BlazorProducts.Client.HttpInterceptor;
 using BlazorProducts.Client.HttpRepositories;
 using Entities.DataTransferObjects;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorProducts.Client.Pages
 {
-    public partial class Companies
+    public partial class Companies : IDisposable
     {
         public IEnumerable<CompanyDto> CompaniesList { get; set; } = new List<CompanyDto>();
         public MetaData MetaData { get; set; } = new MetaData();
@@ -13,9 +14,12 @@ namespace BlazorProducts.Client.Pages
 
         [Inject]
         public ICompanyHttpRepository? CompanyRepository { get; set; }
+        [Inject]
+        public HttpInterceptorService? Interceptor { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
+            Interceptor?.RegisterEvent();
             await GetCompanies();
         }
 
@@ -47,5 +51,13 @@ namespace BlazorProducts.Client.Pages
 
             await GetCompanies();
         }
+
+        private async Task SetSortString(string sortBy)
+        {
+            _parameters.OrderBy = sortBy;
+            await GetCompanies();
+        }
+
+        public void Dispose() => Interceptor?.DisposeEvent();
     }
 }

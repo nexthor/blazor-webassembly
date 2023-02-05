@@ -1,7 +1,9 @@
 ﻿using BlazorProducts.Client.Features;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -10,14 +12,16 @@ namespace BlazorProducts.Client.HttpRepositories
     public class CompanyHttpRepository : ICompanyHttpRepository
     {
         private readonly HttpClient _httpClient;
+        private readonly NavigationManager _navigationManager;
         private readonly JsonSerializerOptions _options = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive= true,
         };
 
-        public CompanyHttpRepository(HttpClient httpClient)
+        public CompanyHttpRepository(HttpClient httpClient, NavigationManager navigationManager)
         {
             _httpClient = httpClient;
+            _navigationManager = navigationManager;
         }
 
         public async Task<PagingResponse<CompanyDto>> GetCompaniesAsync(CompanyParameters companyParameters)
@@ -31,14 +35,12 @@ namespace BlazorProducts.Client.HttpRepositories
             if (!string.IsNullOrEmpty(companyParameters.SearchTerm))
                 queryStringParam.Add("searchTerm", companyParameters.SearchTerm);
 
+            if (!string.IsNullOrEmpty(companyParameters.OrderBy))
+                queryStringParam.Add("orderBy", companyParameters.OrderBy);
+
             var response = await _httpClient
                                     .GetAsync(QueryHelpers.AddQueryString("Companies", queryStringParam));
             var content = await response.Content.ReadAsStringAsync();
-
-            if(!response.IsSuccessStatusCode)
-            {
-                throw new ApplicationException(content);
-            }
 
             var pagingResponse = new PagingResponse<CompanyDto> 
             {

@@ -6,7 +6,7 @@ namespace BlazorProducts.Client.Components
     public partial class SearchField
     {
         public string? SearchTerm { get; set; }
-        private Timer _timer;
+        private Timer? _timer;
         [Parameter]
         public EventCallback<string> OnSearchChanged { get; set; }
 
@@ -23,7 +23,7 @@ namespace BlazorProducts.Client.Components
         {
             OnSearchChanged.InvokeAsync(SearchTerm);
 
-            _timer.Dispose();
+            _timer?.Dispose();
         }
     }
 }
