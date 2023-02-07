@@ -1,3 +1,4 @@
+using Blazored.Toast;
 using BlazorProducts.Client;
 using BlazorProducts.Client.HttpInterceptor;
 using BlazorProducts.Client.HttpRepositories;
@@ -24,5 +25,7 @@ builder.Services.AddScoped<ICompanyHttpRepository, CompanyHttpRepository>();
 
 builder.Services.AddHttpClientInterceptor();
 builder.Services.AddScoped<HttpInterceptorService>();
+
+builder.Services.AddBlazoredToast();
 
 await builder.Build().RunAsync();

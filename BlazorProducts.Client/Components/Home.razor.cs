@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
 using System.Xml.Linq;
 
 namespace BlazorProducts.Client.Components
@@ -18,5 +19,12 @@ namespace BlazorProducts.Client.Components
         public string? Color { get; set; }
         [Parameter]
         public RenderFragment? NewContentProperty { get; set; }
+        [Inject]
+        public IToastService? ToastService { get; set; }
+
+        protected override void OnInitialized()
+        {
+            ToastService?.ShowSuccess("page loaded");
+        }
     }
 }

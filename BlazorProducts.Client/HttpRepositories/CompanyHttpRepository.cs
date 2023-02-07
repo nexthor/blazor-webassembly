@@ -59,5 +59,13 @@ namespace BlazorProducts.Client.HttpRepositories
 
             return company;
         }
+
+        public async Task<CompanyDto> CreateCompany(CompanyForCreationDto request)
+        {
+            var company = await _httpClient.PostAsJsonAsync("companies", request);
+            var response = JsonSerializer.Deserialize<CompanyDto>(company.Content.ReadAsStream());
+
+            return response ?? new CompanyDto();
+        }
     }
 }

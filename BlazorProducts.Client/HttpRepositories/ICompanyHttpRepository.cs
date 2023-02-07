@@ -8,5 +8,6 @@ namespace BlazorProducts.Client.HttpRepositories
     {
         Task<PagingResponse<CompanyDto>> GetCompaniesAsync(CompanyParameters companyParameters);
         Task<CompanyDto> GetCompanyByIdAsync(Guid id);
+        Task<CompanyDto> CreateCompany(CompanyForCreationDto request);
     }
 }
