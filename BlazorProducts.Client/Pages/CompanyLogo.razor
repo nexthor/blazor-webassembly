@@ -1,0 +1,12 @@
+﻿@page "/companies/{id:guid}/logo"
+
+<h3>CompanyLogo</h3>
+
+<InputFile OnChange="@HandleSelected" />
+
+@if (ImgUrl != null) 
+{
+    <div>
+        <img src="@ImgUrl" class="img-fluid" />
+    </div>
+}

@@ -1,6 +1,6 @@
 ﻿<nav arial-label="Pagination">
     <ul class="pagination justify-content-center">
-        @foreach (var link in _links)
+        @foreach (var link in _links!)
         {
             <li 
                 @onclick="() => OnSelectedPage(link)" 

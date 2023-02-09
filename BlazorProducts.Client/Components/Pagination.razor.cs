@@ -21,11 +21,12 @@ namespace BlazorProducts.Client.Components
 
         private void CreatePaginationLinks()
         {
-            _links = new List<PagingLink>();
+            _links = new List<PagingLink>
+            {
+                new PagingLink(MetaData.CurrentPage - 1, MetaData.HasPrevious, "Previous")
+            };
 
-            _links.Add(new PagingLink(MetaData.CurrentPage - 1, MetaData.HasPrevious, "Previous"));
-
-            for(int i = 1; i <= MetaData.TotalPages; i++)
+            for (int i = 1; i <= MetaData.TotalPages; i++)
             {
                 if (i >= MetaData.CurrentPage - Spread && i <= MetaData.CurrentPage + Spread)
                 {

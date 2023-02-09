@@ -67,5 +67,14 @@ namespace BlazorProducts.Client.HttpRepositories
 
             return response ?? new CompanyDto();
         }
+
+        public async Task<string> UploadCompanyLogo(Guid id, MultipartFormDataContent content)
+        {
+            var postResult = await _httpClient.PostAsync($"companies/{id}/upload", content);
+            var postContent = await postResult.Content.ReadAsStringAsync();
+            var imgUrl = Path.Combine("https://localhost:5010/", postContent);
+
+            return imgUrl;
+        }
     }
 }

@@ -16,5 +16,10 @@ namespace BlazorProducts.Client.Pages
         {
             Company = await CompanyRepo?.GetCompanyByIdAsync(Id)!;
         }
+
+        private void AssignLogoUrl(string imgUrl)
+        {
+
+        }
     }
 }

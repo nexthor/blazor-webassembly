@@ -11,6 +11,11 @@
             <div class="col-md-4">Company address:</div>
             <div class="col-md-8">@Company.FullAddress</div>
         </div>
+        <div class="row">
+            <div class="col">
+                <CompanyLogo CompanyId="@Company.Id" OnChange="AssignLogoUrl" />
+            </div>
+        </div>
     </div>
 </div>
 <br />
