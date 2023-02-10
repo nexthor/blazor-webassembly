@@ -21,10 +21,5 @@ namespace BlazorProducts.Client.Components
         public RenderFragment? NewContentProperty { get; set; }
         [Inject]
         public IToastService? ToastService { get; set; }
-
-        protected override void OnInitialized()
-        {
-            ToastService?.ShowSuccess("page loaded");
-        }
     }
 }

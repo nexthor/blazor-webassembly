@@ -8,7 +8,7 @@ namespace BlazorProducts.Client.Features
     {
         public MapperProfiles()
         {
-            CreateMap<Company, CompanyForUpdateDto>();
+            CreateMap<CompanyDto, CompanyForUpdateDto>();
         }
     }
 }

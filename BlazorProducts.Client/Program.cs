@@ -1,7 +1,9 @@
 using Blazored.Toast;
 using BlazorProducts.Client;
+using BlazorProducts.Client.Features;
 using BlazorProducts.Client.HttpInterceptor;
 using BlazorProducts.Client.HttpRepositories;
+using BlazorProducts.Entities.Models.Configurations;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using System.Reflection;
@@ -17,7 +19,7 @@ builder.Logging.SetMinimumLevel(LogLevel.Trace);
 
 builder.Services.AddHttpClient("CompaniesAPI", (sp, cl) =>
 {
-    cl.BaseAddress = new Uri("https://localhost:5010/api/");
+    cl.BaseAddress = new Uri(builder.Configuration["ApiConfiguration:BaseAddress"]!);
     cl.EnableIntercept(sp);
 });
 
@@ -26,6 +28,10 @@ builder.Services.AddScoped<ICompanyHttpRepository, CompanyHttpRepository>();
 
 builder.Services.AddHttpClientInterceptor();
 builder.Services.AddScoped<HttpInterceptorService>();
+builder.Services.Configure<ApiConfiguration>
+    (builder.Configuration.GetSection(nameof(ApiConfiguration)));
+
+builder.Services.AddAutoMapper(typeof(MapperProfiles));
 
 builder.Services.AddBlazoredToast();
 

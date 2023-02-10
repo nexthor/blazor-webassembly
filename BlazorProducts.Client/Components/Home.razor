@@ -1,4 +1,10 @@
-﻿<h3 style="color: @Color">@Title</h3>
+﻿@inject IWebAssemblyHostEnvironment HostEnvironment
+@inject IConfiguration config
+<h3 style="color: @Color">@Title</h3>
+
+<h2>Environment: @HostEnvironment.Environment</h2>
+
+<p>@config["message"]</p>
 
 <p>
     <img @attributes="AdditionalAttributes" class="img-fluid" />

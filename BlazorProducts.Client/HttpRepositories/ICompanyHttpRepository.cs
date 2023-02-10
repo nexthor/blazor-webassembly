@@ -12,5 +12,6 @@ namespace BlazorProducts.Client.HttpRepositories
         Task<CompanyDto> CreateCompany(CompanyForCreationDto request);
         Task<string> UploadCompanyLogo(Guid id, MultipartFormDataContent content);
         Task UpdateCompany(Guid id, CompanyForUpdateDto dto);
+        Task DeleteCompany(Guid id);
     }
 }

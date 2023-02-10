@@ -58,6 +58,16 @@ namespace BlazorProducts.Client.Pages
             await GetCompanies();
         }
 
+        private async Task DeleteCompany(Guid id)
+        {
+            await CompanyRepository!.DeleteCompany(id);
+
+            if (_parameters.PageNumber > 1 && CompaniesList.Count() == 1)
+                _parameters.PageNumber--;
+
+            await GetCompanies();
+        }
+
         public void Dispose() => Interceptor?.DisposeEvent();
     }
 }

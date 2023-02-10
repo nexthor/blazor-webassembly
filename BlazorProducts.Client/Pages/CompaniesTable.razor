@@ -23,9 +23,13 @@
                         </a>
                     </td>
                     <td class="d-flex justify-content-center align-items-center">
-                        <a href="/companies/@company.Id/update/" class="btn btn-info mr-1">Update</a>
-                        <a href="/companies/@company.Id/logo/" class="btn btn-success mr-1">logo</a>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a href="/companies/@company.Id/update/" class="btn btn-info">Update</a>
+                            <a href="/companies/@company.Id/logo/" class="btn btn-success">logo</a>
+                            <button type="button" class="btn btn-danger" @onclick="() => OnDelete.InvokeAsync(company.Id)">
+                                Delete
+                            </button>
+                        </div>
                     </td>
                 </tr>
             }

@@ -7,5 +7,7 @@ namespace BlazorProducts.Client.Pages
     {
         [Parameter]
         public IEnumerable<CompanyDto> Companies { get; set; } = new List<CompanyDto>();
+        [Parameter]
+        public EventCallback<Guid> OnDelete { get; set; }
     }
 }

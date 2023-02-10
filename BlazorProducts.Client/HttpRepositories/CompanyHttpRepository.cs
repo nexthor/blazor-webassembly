@@ -1,9 +1,11 @@
 ﻿using BlazorProducts.Client.Features;
 using BlazorProducts.Entities.DataTransferObjects;
+using BlazorProducts.Entities.Models.Configurations;
 using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -14,15 +16,17 @@ namespace BlazorProducts.Client.HttpRepositories
     {
         private readonly HttpClient _httpClient;
         private readonly NavigationManager _navigationManager;
+        private readonly ApiConfiguration _configuration;
         private readonly JsonSerializerOptions _options = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive= true,
         };
 
-        public CompanyHttpRepository(HttpClient httpClient, NavigationManager navigationManager)
+        public CompanyHttpRepository(HttpClient httpClient, NavigationManager navigationManager, IOptions<ApiConfiguration> configuration)
         {
             _httpClient = httpClient;
             _navigationManager = navigationManager;
+            _configuration = configuration.Value;
         }
 
         public async Task<PagingResponse<CompanyDto>> GetCompaniesAsync(CompanyParameters companyParameters)
@@ -73,11 +77,12 @@ namespace BlazorProducts.Client.HttpRepositories
         {
             var postResult = await _httpClient.PostAsync($"companies/{id}/upload", content);
             var postContent = await postResult.Content.ReadAsStringAsync();
-            var imgUrl = Path.Combine("https://localhost:5010/", postContent);
+            var imgUrl = Path.Combine(_configuration.BaseAddress, postContent);
 
             return imgUrl;
         }
 
         public async Task UpdateCompany(Guid id, CompanyForUpdateDto dto) => await _httpClient.PutAsJsonAsync($"companies/{id}", dto);
+        public async Task DeleteCompany(Guid id) => await _httpClient.DeleteAsync($"companies/{id}");
     }
 }

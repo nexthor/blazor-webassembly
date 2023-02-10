@@ -16,24 +16,21 @@ namespace BlazorProducts.Client.Pages
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private EditContext? _editContext;
         private bool formInvalid = true;
+        [Parameter]
+        public Guid Id { get; set; }
         [Inject]
         public ICompanyHttpRepository? Repository { get; set; }
         [Inject]
         public HttpInterceptorService? Interceptor { get; set; }
         [Inject]
         public IToastService? ToastService { get; set; }
-        [Parameter]
-        public Guid Id { get; set; }
+        [Inject]
+        public IMapper? Mapper { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             var company = await Repository?.GetCompanyByIdAsync(Id)!;
-            _companyForm = new CompanyForUpdateDto
-            {
-                Address = company.FullAddress,
-                Country = company.Country,
-                Name = company.Name,
-            };
+            _companyForm = Mapper!.Map<CompanyForUpdateDto>(company);
 
             _editContext = new EditContext(_companyForm);
             _editContext.OnFieldChanged += HandleFieldChanged;
