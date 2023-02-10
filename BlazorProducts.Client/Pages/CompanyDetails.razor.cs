@@ -1,5 +1,5 @@
 ﻿using BlazorProducts.Client.HttpRepositories;
-using Entities.DataTransferObjects;
+using BlazorProducts.Entities.DataTransferObjects;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorProducts.Client.Pages

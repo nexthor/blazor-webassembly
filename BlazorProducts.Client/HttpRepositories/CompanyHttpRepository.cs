@@ -1,4 +1,5 @@
 ﻿using BlazorProducts.Client.Features;
+using BlazorProducts.Entities.DataTransferObjects;
 using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Components;
@@ -76,5 +77,7 @@ namespace BlazorProducts.Client.HttpRepositories
 
             return imgUrl;
         }
+
+        public async Task UpdateCompany(Guid id, CompanyForUpdateDto dto) => await _httpClient.PutAsJsonAsync($"companies/{id}", dto);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using BlazorProducts.Client.Features;
 using BlazorProducts.Client.HttpInterceptor;
 using BlazorProducts.Client.HttpRepositories;
-using Entities.DataTransferObjects;
+using BlazorProducts.Entities.DataTransferObjects;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorProducts.Client.Pages

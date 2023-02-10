@@ -4,6 +4,7 @@ using BlazorProducts.Client.HttpInterceptor;
 using BlazorProducts.Client.HttpRepositories;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using System.Reflection;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

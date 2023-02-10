@@ -1,4 +1,5 @@
 ﻿using BlazorProducts.Client.Features;
+using BlazorProducts.Entities.DataTransferObjects;
 using Entities.DataTransferObjects;
 using Entities.Models;
 
@@ -10,5 +11,6 @@ namespace BlazorProducts.Client.HttpRepositories
         Task<CompanyDto> GetCompanyByIdAsync(Guid id);
         Task<CompanyDto> CreateCompany(CompanyForCreationDto request);
         Task<string> UploadCompanyLogo(Guid id, MultipartFormDataContent content);
+        Task UpdateCompany(Guid id, CompanyForUpdateDto dto);
     }
 }
