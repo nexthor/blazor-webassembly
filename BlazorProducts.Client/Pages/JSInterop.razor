@@ -10,7 +10,7 @@
         <button type="button" class="btn btn-info" @onclick="ShowAlertWindow">click me</button>
     </div>
 </div>
-
+<hr />
 <div class="row">
     <div class="col-4">
         Example for calling a JS returning something:
@@ -19,6 +19,31 @@
         <button type="button" class="btn btn-info" @onclick="RegisterEmail">Register Email</button>
     </div>
     <div class="col-6">
-        @_registrationResult;
+        @_registrationResult
     </div>
 </div>
+<hr />
+<div class="row">
+    <div class="col-4">
+        Example for calling a JS returning an object:
+    </div>
+    <div class="col-2">
+        <button type="button" class="btn btn-info" @onclick="GetEmailDetails">Get Email Details</button>
+    </div>
+    <div class="col-6">
+        @_emailDetails
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-4">
+        Passing HTML Reference to JS function:
+    </div>
+    <div class="col-2">
+        <input type="text" @ref="_inputRef" class="form-control" />
+    </div>
+    <div class="col-6">
+        <button type="button" class="btn btn-info" @onclick="FocusAndStyleElement">Focus</button>
+    </div>
+</div>
+<hr />

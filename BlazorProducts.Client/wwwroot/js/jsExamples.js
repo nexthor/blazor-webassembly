@@ -17,3 +17,24 @@ export function emailRegistration(message) {
 
     return returnMessage;
 }
+
+export function getEmailDetails(message) {
+    const email = prompt(message);
+
+    if (email == null)
+        return;
+
+    const partsWithAt = email.split("@");
+    const partsWithDomain = partsWithAt[1];
+
+    return {
+        name: partsWithAt[0],
+        server: partsWithDomain[0],
+        domain: partsWithDomain[1]
+    }
+}
+
+export function focusAndStyleElement(element) {
+    element.style.color = "red";
+    element.focus();
+}

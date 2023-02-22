@@ -10,6 +10,8 @@ namespace BlazorProducts.Client.Pages
 
         private IJSObjectReference? _jsModule;
         private string? _registrationResult;
+        private string? _emailDetails;
+        private ElementReference? _inputRef;
 
         protected override async Task OnInitializedAsync()
         {
@@ -26,5 +28,25 @@ namespace BlazorProducts.Client.Pages
         {
             _registrationResult = await _jsModule!.InvokeAsync<string>("emailRegistration", "Please provide your email");
         }
+
+        private async Task GetEmailDetails()
+        {
+            var email = await _jsModule!.InvokeAsync<EmailDetail>("getEmailDetails", "please provide a valid email");
+
+            if (email != null)
+                _emailDetails = $"name: {email.Name}, server: {email.Server}, domain: {email.Domain}";
+        }
+
+        private async Task FocusAndStyleElement()
+        {
+            await _jsModule!.InvokeVoidAsync("focusAndStyleElement", _inputRef);
+        }
+    }
+
+    class EmailDetail
+    {
+        public string? Name { get; set; }
+        public string? Server { get; set; }
+        public string? Domain { get; set; }
     }
 }
