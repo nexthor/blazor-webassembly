@@ -12,10 +12,16 @@ namespace BlazorProducts.Client.Pages
         private string? _registrationResult;
         private string? _emailDetails;
         private ElementReference? _inputRef;
+        private string? _errorMessage;
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            _jsModule = await JSRuntime!.InvokeAsync<IJSObjectReference>("import", "./js/jsExamples.js");
+            if (firstRender)
+            {
+                _jsModule = await JSRuntime!.InvokeAsync<IJSObjectReference>("import", "./js/jsExamples.js");
+
+                await ThrowError();
+            }
         }
 
         public async Task ShowAlertWindow()
@@ -40,6 +46,19 @@ namespace BlazorProducts.Client.Pages
         private async Task FocusAndStyleElement()
         {
             await _jsModule!.InvokeVoidAsync("focusAndStyleElement", _inputRef);
+        }
+
+        private async Task ThrowError()
+        {
+            try
+            {
+                await _jsModule!.InvokeVoidAsync("throwError");
+            } 
+            catch (JSException ex)
+            {
+                _errorMessage = ex.Message;
+                StateHasChanged();
+            }
         }
     }
 

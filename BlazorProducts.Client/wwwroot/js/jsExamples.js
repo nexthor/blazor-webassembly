@@ -38,3 +38,7 @@ export function focusAndStyleElement(element) {
     element.style.color = "red";
     element.focus();
 }
+
+export function throwError() {
+    throw Error("Testing error message from JS file.");
+}
