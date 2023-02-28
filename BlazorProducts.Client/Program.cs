@@ -1,9 +1,12 @@
+using Blazored.LocalStorage;
 using Blazored.Toast;
 using BlazorProducts.Client;
+using BlazorProducts.Client.AuthProviders;
 using BlazorProducts.Client.Features;
 using BlazorProducts.Client.HttpInterceptor;
 using BlazorProducts.Client.HttpRepositories;
 using BlazorProducts.Entities.Models.Configurations;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using System.Reflection;
@@ -25,6 +28,13 @@ builder.Services.AddHttpClient("CompaniesAPI", (sp, cl) =>
 
 builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>()!.CreateClient("CompaniesAPI"));
 builder.Services.AddScoped<ICompanyHttpRepository, CompanyHttpRepository>();
+
+// autorization items
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<RefreshTokenService>();
 
 builder.Services.AddHttpClientInterceptor();
 builder.Services.AddScoped<HttpInterceptorService>();
